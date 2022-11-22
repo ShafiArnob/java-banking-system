@@ -32,7 +32,7 @@
                               <Component id="withdrawBtn" max="32767" attributes="0"/>
                               <Component id="depositBtn" max="32767" attributes="0"/>
                               <Component id="transferBtn" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
-                              <Component id="transferBtn1" alignment="1" min="-2" pref="320" max="-2" attributes="0"/>
+                              <Component id="accInfoBtn" alignment="1" min="-2" pref="320" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="98" max="-2" attributes="0"/>
@@ -58,7 +58,7 @@
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="12" max="32767" attributes="0"/>
-              <Component id="transferBtn1" min="-2" max="-2" attributes="0"/>
+              <Component id="accInfoBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="depositBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -117,7 +117,7 @@
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="transferBtn1">
+    <Component class="javax.swing.JButton" name="accInfoBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -125,7 +125,7 @@
         <Property name="text" type="java.lang.String" value="Account Information"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transferBtn1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accInfoBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

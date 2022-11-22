@@ -32,7 +32,7 @@ public class dashboard extends javax.swing.JFrame {
         transferBtn = new javax.swing.JButton();
         withdrawBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        transferBtn1 = new javax.swing.JButton();
+        accInfoBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,11 +65,11 @@ public class dashboard extends javax.swing.JFrame {
 
         jLabel2.setText("Back");
 
-        transferBtn1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        transferBtn1.setText("Account Information");
-        transferBtn1.addActionListener(new java.awt.event.ActionListener() {
+        accInfoBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        accInfoBtn.setText("Account Information");
+        accInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transferBtn1ActionPerformed(evt);
+                accInfoBtnActionPerformed(evt);
             }
         });
 
@@ -86,7 +86,7 @@ public class dashboard extends javax.swing.JFrame {
                                 .addComponent(withdrawBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(depositBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(transferBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(transferBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(accInfoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
@@ -104,7 +104,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(transferBtn1)
+                .addComponent(accInfoBtn)
                 .addGap(18, 18, 18)
                 .addComponent(depositBtn)
                 .addGap(18, 18, 18)
@@ -118,20 +118,32 @@ public class dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void withdrawBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawBtnActionPerformed
-        // TODO add your handling code here:
+        // Withdraw from account
+        withdrawPage acc = new withdrawPage();
+        acc.setVisible(true);
+        dispose();
     }//GEN-LAST:event_withdrawBtnActionPerformed
 
     private void depositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositBtnActionPerformed
-        // TODO add your handling code here:
+        // Deposit to account
+        depositPage acc = new depositPage();
+        acc.setVisible(true);
+        dispose();
     }//GEN-LAST:event_depositBtnActionPerformed
 
     private void transferBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtnActionPerformed
-        // TODO add your handling code here:
+        // Transfer from one account to another
+        transferPage acc = new transferPage();
+        acc.setVisible(true);
+        dispose();
     }//GEN-LAST:event_transferBtnActionPerformed
 
-    private void transferBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transferBtn1ActionPerformed
+    private void accInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accInfoBtnActionPerformed
+        // Account Information
+        accountInformation acc = new accountInformation();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_accInfoBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,11 +181,11 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accInfoBtn;
     private javax.swing.JButton depositBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton transferBtn;
-    private javax.swing.JButton transferBtn1;
     private javax.swing.JButton withdrawBtn;
     // End of variables declaration//GEN-END:variables
 }
