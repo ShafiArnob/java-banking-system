@@ -192,6 +192,9 @@ public class depositPage extends javax.swing.JFrame {
                 String amountDb = result.getString("amount");
                 balanceAmount.setText(amountDb);
             }
+            else{
+                balanceAmount.setText("NA");
+            }
         }catch(Exception e){
         
         }

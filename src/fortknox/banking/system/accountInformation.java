@@ -27,17 +27,66 @@ public class accountInformation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        name = new javax.swing.JLabel();
+        username = new javax.swing.JLabel();
+        amount = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        jLabel1.setText("Account Information");
+
+        searchField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        searchField.setText("Insert Account Number");
+
+        searchBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        searchBtn.setText("Search");
+
+        name.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        name.setText("Name :");
+
+        username.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        username.setText("UserName :");
+
+        amount.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        amount.setText("Amount :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(name)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchBtn))
+                    .addComponent(username)
+                    .addComponent(amount))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn))
+                .addGap(12, 12, 12)
+                .addComponent(name)
+                .addGap(18, 18, 18)
+                .addComponent(username)
+                .addGap(18, 18, 18)
+                .addComponent(amount)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +128,11 @@ public class accountInformation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel amount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel name;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }
