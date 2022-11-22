@@ -39,8 +39,8 @@ public class depositPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
         submitDepositBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        shoBalanceBtn = new javax.swing.JLabel();
+        balanceAmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,9 +70,17 @@ public class depositPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Show Balance : -");
+        shoBalanceBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        shoBalanceBtn.setForeground(new java.awt.Color(0, 0, 204));
+        shoBalanceBtn.setText("Show Balance : -");
+        shoBalanceBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                shoBalanceBtnMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setText("0");
+        balanceAmount.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        balanceAmount.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,9 +106,9 @@ public class depositPage extends javax.swing.JFrame {
                                     .addComponent(ac_number, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(shoBalanceBtn)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel5)))))
+                                .addComponent(balanceAmount)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,9 +128,9 @@ public class depositPage extends javax.swing.JFrame {
                 .addComponent(submitDepositBtn)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(shoBalanceBtn)
+                    .addComponent(balanceAmount))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,44 +142,60 @@ public class depositPage extends javax.swing.JFrame {
 
     private void submitDepositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitDepositBtnActionPerformed
         // Deposit to account
-        Connection con = null ;
+        Connection con = null;
         String amountStr = amount.getText();
         int amountInt = Integer.parseInt(amountStr);
         int accountNumberInt = Integer.parseInt(ac_number.getText());
-        try{
-            String sql = "SELECT * FROM register WHERE ac_number='"+accountNumberInt+"'";
+        try {
+            String sql = "SELECT * FROM register WHERE ac_number='" + accountNumberInt + "'";
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
             Statement s = con.createStatement();
             ResultSet result = s.executeQuery(sql);
-            
-            if(result.next() && !(amountInt<=0)){
+
+            if (result.next() && !(amountInt <= 0)) {
                 int accountNumberDb = Integer.parseInt(result.getString("ac_number"));
                 int amountDb = Integer.parseInt(result.getString("amount"));
-                if(accountNumberInt==accountNumberDb){
-                    int newAmount = amountInt+amountDb;
+                
+                if (accountNumberInt == accountNumberDb) {
+                    int newAmount = amountInt + amountDb;
                     ///try updating the new amount
-                    try{
-                        String sql2 = "UPDATE register SET amount='"+newAmount+"'WHERE ac_number='"+accountNumberDb+"'";
+                    try {
+                        String sql2 = "UPDATE register SET amount='" + newAmount + "'WHERE ac_number='" + accountNumberDb + "'";
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+                        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
                         Statement st = con.createStatement();
                         st.executeUpdate(sql2);
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Account Not Registered");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"Account Not Registered");
-                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Found or Invalid Amount");
             }
-            else{
-                JOptionPane.showMessageDialog(null,"Not Found or Invalid Amount");
-            }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_submitDepositBtnActionPerformed
+
+    private void shoBalanceBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shoBalanceBtnMouseClicked
+        // Show Balance
+        try{
+            String sql = "SELECT * FROM register WHERE ac_number='" + ac_number.getText() + "'";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+            Statement s = con.createStatement();
+            ResultSet result = s.executeQuery(sql);
+            if (result.next()){
+                String amountDb = result.getString("amount");
+                balanceAmount.setText(amountDb);
+            }
+        }catch(Exception e){
+        
+        }
+    }//GEN-LAST:event_shoBalanceBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -211,11 +235,11 @@ public class depositPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ac_number;
     private javax.swing.JTextField amount;
+    private javax.swing.JLabel balanceAmount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel shoBalanceBtn;
     private javax.swing.JButton submitDepositBtn;
     // End of variables declaration//GEN-END:variables
 }
