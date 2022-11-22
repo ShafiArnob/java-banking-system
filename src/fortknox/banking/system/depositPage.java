@@ -5,6 +5,12 @@
  */
 package fortknox.banking.system;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Arnob
@@ -127,7 +133,44 @@ public class depositPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ac_numberActionPerformed
 
     private void submitDepositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitDepositBtnActionPerformed
-        // TODO add your handling code here:
+        // Deposit to account
+        Connection con = null ;
+        String amountStr = amount.getText();
+        int amountInt = Integer.parseInt(amountStr);
+        int accountNumberInt = Integer.parseInt(ac_number.getText());
+        try{
+            String sql = "SELECT * FROM register WHERE ac_number='"+accountNumberInt+"'";
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+            Statement s = con.createStatement();
+            ResultSet result = s.executeQuery(sql);
+            
+            if(result.next() && !(amountInt<=0)){
+                int accountNumberDb = Integer.parseInt(result.getString("ac_number"));
+                int amountDb = Integer.parseInt(result.getString("amount"));
+                if(accountNumberInt==accountNumberDb){
+                    int newAmount = amountInt+amountDb;
+                    ///try updating the new amount
+                    try{
+                        String sql2 = "UPDATE register SET amount='"+newAmount+"'WHERE ac_number='"+accountNumberDb+"'";
+                        Class.forName("com.mysql.jdbc.Driver");
+                        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+                        Statement st = con.createStatement();
+                        st.executeUpdate(sql2);
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Account Not Registered");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Not Found or Invalid Amount");
+            }
+        }catch(Exception e){
+            System.err.println(e);
+        }
     }//GEN-LAST:event_submitDepositBtnActionPerformed
 
     /**
