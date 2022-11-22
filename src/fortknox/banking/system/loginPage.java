@@ -5,6 +5,11 @@
  */
 package fortknox.banking.system;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Arnob
@@ -29,10 +34,10 @@ public class loginPage extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
+        l_username = new javax.swing.JTextField();
+        l_password = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,19 +48,24 @@ public class loginPage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Password :");
 
-        username.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        l_username.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        password.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        password.addActionListener(new java.awt.event.ActionListener() {
+        l_password.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        l_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
+                l_passwordActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
         jLabel3.setText("Login");
 
-        jButton1.setText("Login");
+        loginBtn.setText("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setText("Not a member?? Register Now!!!");
@@ -78,8 +88,8 @@ public class loginPage extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                            .addComponent(password)
+                            .addComponent(l_username, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                            .addComponent(l_password)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabel3))))
@@ -87,7 +97,7 @@ public class loginPage extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,14 +107,14 @@ public class loginPage extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(loginBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(53, Short.MAX_VALUE))
@@ -113,9 +123,9 @@ public class loginPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+    private void l_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
+    }//GEN-LAST:event_l_passwordActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // Register Page Event
@@ -123,6 +133,41 @@ public class loginPage extends javax.swing.JFrame {
         reg.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        // Login user
+        Connection con = null ;
+        
+        String lUsername = l_username.getText();
+        String lPassword = l_password.getText();
+        
+        try{
+            String sql = "select * from register  WHERE username='"+lUsername+"'";
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+            Statement s = con.createStatement();
+            ResultSet result = s.executeQuery(sql);
+            
+            if(result.next()){
+                String username = result.getString("username");
+                String password = result.getString("password");
+                if(lUsername.equals(username) && lPassword.equals(password)){
+                    new dashboard().setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"User Not Registered");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"User Not Registered");
+            }
+            
+        }catch(Exception e){
+            
+        }
+        
+        
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,12 +205,12 @@ public class loginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField password;
-    private javax.swing.JTextField username;
+    private javax.swing.JTextField l_password;
+    private javax.swing.JTextField l_username;
+    private javax.swing.JButton loginBtn;
     // End of variables declaration//GEN-END:variables
 }
