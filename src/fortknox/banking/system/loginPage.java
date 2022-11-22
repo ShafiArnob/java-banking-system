@@ -153,6 +153,7 @@ public class loginPage extends javax.swing.JFrame {
                 String password = result.getString("password");
                 if(lUsername.equals(username) && lPassword.equals(password)){
                     new dashboard().setVisible(true);
+                    dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"User Not Registered");
