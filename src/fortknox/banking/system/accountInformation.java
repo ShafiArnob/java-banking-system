@@ -5,6 +5,11 @@
  */
 package fortknox.banking.system;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
 /**
  *
  * @author Arnob
@@ -33,6 +38,7 @@ public class accountInformation extends javax.swing.JFrame {
         name = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
         amount = new javax.swing.JLabel();
+        password = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +50,11 @@ public class accountInformation extends javax.swing.JFrame {
 
         searchBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         name.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         name.setText("Name :");
@@ -54,6 +65,9 @@ public class accountInformation extends javax.swing.JFrame {
         amount.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         amount.setText("Amount :");
 
+        password.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        password.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,12 +77,14 @@ public class accountInformation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(name)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchBtn))
                     .addComponent(username)
-                    .addComponent(amount))
+                    .addComponent(amount)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchBtn)))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -76,21 +92,52 @@ public class accountInformation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchBtn))
-                .addGap(12, 12, 12)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
                 .addComponent(name)
                 .addGap(18, 18, 18)
                 .addComponent(username)
                 .addGap(18, 18, 18)
                 .addComponent(amount)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // Search Information
+        try{
+            String sql = "select * from register  WHERE ac_number='"+searchField.getText()+"' AND password='"+password.getText()+"'";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
+            Statement s = con.createStatement();
+            ResultSet result = s.executeQuery(sql);
+            if(result.next()){
+                String usernameDb = result.getString("username");
+                String nameDb = result.getString("name");
+                String amountDb = result.getString("amount");
+                
+                username.setText("Username : " + usernameDb);
+                name.setText("Name : " + nameDb);
+                amount.setText("Amount : " + amountDb);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"User Not Registered");
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +178,7 @@ public class accountInformation extends javax.swing.JFrame {
     private javax.swing.JLabel amount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel name;
+    private javax.swing.JTextField password;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchField;
     private javax.swing.JLabel username;
