@@ -41,6 +41,7 @@ public class depositPage extends javax.swing.JFrame {
         submitDepositBtn = new javax.swing.JButton();
         shoBalanceBtn = new javax.swing.JLabel();
         balanceAmount = new javax.swing.JLabel();
+        backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,14 @@ public class depositPage extends javax.swing.JFrame {
         balanceAmount.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         balanceAmount.setText("0");
 
+        backBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        backBtn.setText("< Back");
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,13 +117,18 @@ public class depositPage extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(shoBalanceBtn)
                                 .addGap(18, 18, 18)
-                                .addComponent(balanceAmount)))))
+                                .addComponent(balanceAmount))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBtn)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(20, 20, 20)
+                .addComponent(backBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -130,7 +144,7 @@ public class depositPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(shoBalanceBtn)
                     .addComponent(balanceAmount))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,6 +214,13 @@ public class depositPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_shoBalanceBtnMouseClicked
 
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        // Back to dashboard
+        dashboard acc = new dashboard();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +259,7 @@ public class depositPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ac_number;
     private javax.swing.JTextField amount;
+    private javax.swing.JLabel backBtn;
     private javax.swing.JLabel balanceAmount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
