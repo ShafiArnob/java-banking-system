@@ -173,7 +173,7 @@ public class withdrawPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ac_numberActionPerformed
 
     private void submitwithdrawBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitwithdrawBtnActionPerformed
-        // Deposit to account
+        // withdraw from account
         Connection con = null;
         String amountStr = amount.getText();
         int amountInt = Integer.parseInt(amountStr);

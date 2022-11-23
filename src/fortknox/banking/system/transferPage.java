@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package fortknox.banking.system;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Arnob
@@ -27,21 +31,235 @@ public class transferPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        transAmount = new javax.swing.JTextField();
+        transferBtn = new javax.swing.JButton();
+        shoBalanceBtn = new javax.swing.JLabel();
+        balanceAmount = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        password = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JLabel();
+        ac_number = new javax.swing.JTextField();
+        transAc = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("Enter Amount :");
+
+        transAmount.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        transferBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        transferBtn.setText("Transfer");
+        transferBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferBtnActionPerformed(evt);
+            }
+        });
+
+        shoBalanceBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        shoBalanceBtn.setForeground(new java.awt.Color(0, 0, 204));
+        shoBalanceBtn.setText("Show Balance : -");
+        shoBalanceBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                shoBalanceBtnMouseClicked(evt);
+            }
+        });
+
+        balanceAmount.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        balanceAmount.setText("0");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setText("Password :");
+
+        password.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        jLabel1.setText("Withdraw");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setText("AC Number :");
+
+        backBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        backBtn.setText("< Back");
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
+
+        ac_number.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        ac_number.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ac_numberActionPerformed(evt);
+            }
+        });
+
+        transAc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("Transfer Account :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(shoBalanceBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(balanceAmount))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(ac_number, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(transAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(transAc, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(transferBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBtn)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(backBtn)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ac_number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(transAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(33, 33, 33)
+                .addComponent(transferBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shoBalanceBtn)
+                    .addComponent(balanceAmount))
+                .addGap(57, 57, 57))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void transferBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtnActionPerformed
+        String accountNumber = ac_number.getText(); //from
+        String pass = password.getText();
+        String transAccount = transAc.getText();
+        int transAmt = Integer.parseInt(transAmount.getText());
+        
+        try{
+            String sql = "SELECT * FROM register WHERE ac_number='" + accountNumber + "' AND password='" + pass + "'";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+            Statement s = con.createStatement();
+            ResultSet result1 = s.executeQuery(sql); //transfer from
+            
+            //if trannsferee account found or not
+            if(result1.next() && (transAmt>0) && (transAmt<=Integer.parseInt(result1.getString("amount")))){
+                String sql2 = "SELECT * FROM register WHERE ac_number='" + transAccount + "'";
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+                Statement s2 = con2.createStatement();
+                ResultSet result2 = s2.executeQuery(sql2); //transfer to
+                
+                //check transfer account exists or not
+                if(result2.next()){
+                    //From
+                    int newAmountFrom = Integer.parseInt(result1.getString("amount")) - transAmt;
+                    String sqlFrom = "UPDATE register SET amount='"+newAmountFrom+"' WHERE ac_number='"+accountNumber+"'";
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection conFrom = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+                    Statement sFrom = conFrom.createStatement();
+                    sFrom.executeUpdate(sqlFrom);
+                    
+                    //to
+                    int newAmountTo = Integer.parseInt(result1.getString("amount")) + transAmt;
+                    String sqlTo = "UPDATE register SET amount='"+newAmountTo+"' WHERE ac_number='"+transAccount+"'";
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection conTo = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+                    Statement sTo = conTo.createStatement();
+                    sTo.executeUpdate(sqlTo);
+                    
+                    JOptionPane.showMessageDialog(null, "Transfer Completed");
+                }else{
+                    //transfer to account not found
+                    JOptionPane.showMessageDialog(null, "Transfer Account Not Found");
+                }
+            }else{
+                //if transferee acc not found
+                JOptionPane.showMessageDialog(null, "Transferee Account Not Found");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_transferBtnActionPerformed
+
+    private void shoBalanceBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shoBalanceBtnMouseClicked
+        // Show Balance
+        try{
+            String sql = "SELECT * FROM register WHERE ac_number='" + ac_number.getText() + "'";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+            Statement s = con.createStatement();
+            ResultSet result = s.executeQuery(sql);
+            if (result.next()){
+                String amountDb = result.getString("amount");
+                balanceAmount.setText(amountDb);
+            }
+            else{
+                balanceAmount.setText("NA");
+            }
+        }catch(Exception e){
+
+        }
+    }//GEN-LAST:event_shoBalanceBtnMouseClicked
+
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        // Back to dashboard
+        dashboard acc = new dashboard();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnMouseClicked
+
+    private void ac_numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ac_numberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ac_numberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +297,18 @@ public class transferPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ac_number;
+    private javax.swing.JLabel backBtn;
+    private javax.swing.JLabel balanceAmount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField password;
+    private javax.swing.JLabel shoBalanceBtn;
+    private javax.swing.JTextField transAc;
+    private javax.swing.JTextField transAmount;
+    private javax.swing.JButton transferBtn;
     // End of variables declaration//GEN-END:variables
 }
