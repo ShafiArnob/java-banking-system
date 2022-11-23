@@ -31,7 +31,7 @@ public class dashboard extends javax.swing.JFrame {
         depositBtn = new javax.swing.JButton();
         transferBtn = new javax.swing.JButton();
         withdrawBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        logout = new javax.swing.JLabel();
         accInfoBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,7 +63,13 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Back");
+        logout.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        logout.setText("Logout");
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
 
         accInfoBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         accInfoBtn.setText("Account Information");
@@ -93,17 +99,17 @@ public class dashboard extends javax.swing.JFrame {
                                 .addGap(96, 96, 96)))
                         .addGap(93, 93, 93))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(32, 32, 32))))
+                        .addComponent(logout)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2)
-                .addGap(50, 50, 50)
+                .addContainerGap()
+                .addComponent(logout)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(accInfoBtn)
                 .addGap(18, 18, 18)
                 .addComponent(depositBtn)
@@ -145,6 +151,13 @@ public class dashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_accInfoBtnActionPerformed
 
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        // Logout
+        loginPage acc = new loginPage();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -184,7 +197,7 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JButton accInfoBtn;
     private javax.swing.JButton depositBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel logout;
     private javax.swing.JButton transferBtn;
     private javax.swing.JButton withdrawBtn;
     // End of variables declaration//GEN-END:variables

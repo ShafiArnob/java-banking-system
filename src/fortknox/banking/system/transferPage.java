@@ -78,7 +78,7 @@ public class transferPage extends javax.swing.JFrame {
         password.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
-        jLabel1.setText("Withdraw");
+        jLabel1.setText("Transfer");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("AC Number :");
@@ -135,12 +135,13 @@ public class transferPage extends javax.swing.JFrame {
                                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(transferBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(backBtn)))
                 .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,13 +220,14 @@ public class transferPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Transfer Completed");
                 }else{
                     //transfer to account not found
-                    JOptionPane.showMessageDialog(null, "Transfer Account Not Found");
+                    JOptionPane.showMessageDialog(null, "Transfer Account Not Found Invalid Input");
                 }
             }else{
                 //if transferee acc not found
-                JOptionPane.showMessageDialog(null, "Transferee Account Not Found");
+                JOptionPane.showMessageDialog(null, "Transferee Account Not Found \n or Invalid Password \n or Invalid Input \n or Invalid Transfer Amount");
             }
         }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Invalid Input");
             System.out.println(e);
         }
     }//GEN-LAST:event_transferBtnActionPerformed

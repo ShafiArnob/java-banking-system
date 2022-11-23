@@ -195,6 +195,7 @@ public class registerPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "User Registered");
             con.close();
         }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Invalid Entry");
             System.err.println(e);
         }
     }//GEN-LAST:event_registerBtnActionPerformed
