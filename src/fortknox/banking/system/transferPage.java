@@ -211,12 +211,18 @@ public class transferPage extends javax.swing.JFrame {
                     
                     //to
                     String newAmountTo = Integer.toString(Integer.parseInt(result2.getString("amount")) + transAmt);
-                    System.out.println(newAmountTo);
                     String sqlTo = "UPDATE register SET amount='"+newAmountTo+"' WHERE ac_number='"+transAccount+"'";
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection conTo = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
                     Statement sTo = conTo.createStatement();
                     sTo.executeUpdate(sqlTo);
+                    
+                    //add to statement
+                    String sqlS = "INSERT INTO statement(from_ac,to_ac,amount,type) VALUES ('"+accountNumber+"','"+transAccount+"','"+transAmt+"','transfer')";
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection conS = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");
+                    Statement sS = conS.createStatement();
+                    sS.executeUpdate(sqlS);
                     
                     JOptionPane.showMessageDialog(null, "Transfer Completed");
                 }else{
