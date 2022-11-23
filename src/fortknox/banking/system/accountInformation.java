@@ -147,7 +147,7 @@ public class accountInformation extends javax.swing.JFrame {
                 amount.setText("Amount : " + amountDb);
             }
             else{
-                JOptionPane.showMessageDialog(null,"User Not Registered");
+                JOptionPane.showMessageDialog(null,"User Not Registered or Invalid Password");
             }
             
         }catch(Exception e){

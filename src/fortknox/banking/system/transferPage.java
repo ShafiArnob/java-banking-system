@@ -210,7 +210,8 @@ public class transferPage extends javax.swing.JFrame {
                     sFrom.executeUpdate(sqlFrom);
                     
                     //to
-                    int newAmountTo = Integer.parseInt(result1.getString("amount")) + transAmt;
+                    String newAmountTo = Integer.toString(Integer.parseInt(result2.getString("amount")) + transAmt);
+                    System.out.println(newAmountTo);
                     String sqlTo = "UPDATE register SET amount='"+newAmountTo+"' WHERE ac_number='"+transAccount+"'";
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection conTo = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull", "root", "");

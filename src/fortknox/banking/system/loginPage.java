@@ -142,7 +142,7 @@ public class loginPage extends javax.swing.JFrame {
         String lPassword = l_password.getText();
         
         try{
-            String sql = "select * from register  WHERE username='"+lUsername+"'";
+            String sql = "select * from register  WHERE username='"+lUsername+"' AND password='"+lPassword+"'";
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?zeroDateTimeBehavior=convertToNull","root","");
             Statement s = con.createStatement();
