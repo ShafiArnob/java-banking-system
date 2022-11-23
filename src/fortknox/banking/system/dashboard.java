@@ -27,6 +27,7 @@ public class dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         depositBtn = new javax.swing.JButton();
         transferBtn = new javax.swing.JButton();
@@ -34,6 +35,9 @@ public class dashboard extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         accInfoBtn = new javax.swing.JButton();
         accountStatementBtn = new javax.swing.JButton();
+        editAccountBtn = new javax.swing.JButton();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +92,14 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
+        editAccountBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        editAccountBtn.setText("Edit Account");
+        editAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAccountBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +117,8 @@ public class dashboard extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
                                 .addGap(96, 96, 96))
-                            .addComponent(accountStatementBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(accountStatementBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(93, 93, 93))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(logout)
@@ -118,7 +131,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addComponent(logout)
                 .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(accInfoBtn)
                 .addGap(18, 18, 18)
                 .addComponent(depositBtn)
@@ -128,7 +141,9 @@ public class dashboard extends javax.swing.JFrame {
                 .addComponent(transferBtn)
                 .addGap(18, 18, 18)
                 .addComponent(accountStatementBtn)
-                .addGap(51, 51, 51))
+                .addGap(18, 18, 18)
+                .addComponent(editAccountBtn)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,6 +191,13 @@ public class dashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_accountStatementBtnActionPerformed
 
+    private void editAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountBtnActionPerformed
+        // TODO add your handling code here:
+        editPage acc = new editPage();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_editAccountBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,7 +237,9 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JButton accInfoBtn;
     private javax.swing.JButton accountStatementBtn;
     private javax.swing.JButton depositBtn;
+    private javax.swing.JButton editAccountBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel logout;
     private javax.swing.JButton transferBtn;
     private javax.swing.JButton withdrawBtn;
